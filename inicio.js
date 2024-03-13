@@ -111,7 +111,7 @@ function showWeatherData(position) {
 
 function callWeatherAPI(latitude, longitude){
 
-	 const apiKey = 'd73e03a0e0532c681e424e8beab15459';
+	 const apiKey = '';
 	 const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
         // Hacemos la solicitud a la API
     fetch(apiUrl)
