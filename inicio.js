@@ -109,6 +109,7 @@ function showWeatherData(position) {
 	callWeatherAPI(latitude, longitude);
 }
 
+
 function callWeatherAPI(latitude, longitude){
 
 	 const apiKey = '';
