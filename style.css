@@ -59,13 +59,12 @@ body{
 }
 
 .header-text {
-    font-size: 16px;
-    color: #FFFFFF;
     background-color: #25458A;
-    padding: 5px;
-    border-radius: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
+    color: #FFFFFF;
+    font-size: 16px;
+    padding: 5px 10px 4px 10px; 
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .div-header-tiempo{
@@ -212,5 +211,67 @@ body{
   color: #333; /* Color de los iconos */
   margin: 0 10px; /* Margen entre los iconos */
 }
+
+.foter-custom{
+	background-color: #25458a;
+    height: 50px;
+}
+
+
+@media (max-width: 768px) {
+    .carousel-inner .carousel-item > div {
+        display: none;
+    }
+    .carousel-inner .carousel-item > div:first-child {
+        display: block;
+    }
+}
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+/* display 3 */
+@media (min-width: 768px) {
+    
+    .carousel-inner .carousel-item-right.active,
+    .carousel-inner .carousel-item-next {
+      transform: translateX(25%);
+    }
+    
+    .carousel-inner .carousel-item-left.active, 
+    .carousel-inner .carousel-item-prev {
+      transform: translateX(-25%);
+    }
+}
+
+.carousel-inner .carousel-item-right,
+.carousel-inner .carousel-item-left{ 
+  transform: translateX(0);
+}
+
+ @media (max-width: 576px) { /* Cambia el valor de acuerdo a tus necesidades */
+    .justify-content-sm-center {
+        -ms-flex-pack: center !important;
+        justify-content: center !important;
+    }
+    
+    #climaSemana {
+        display: block !important; /* Cambiar a display block para evitar el comportamiento de flexbox */
+        /* No es necesario agregar justify-content: center; ya que no se está utilizando flexbox */
+    }
+    .card-clima-semana{
+    	margin-left: 25px !important;
+    	margin-top: 10px !important; 
+    }
+	
+	.clima-semana-mobile{
+		margin-top:10px !important;
+	}
+}
+
+
 
 

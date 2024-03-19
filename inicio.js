@@ -10,12 +10,39 @@ var datosWeather =
 
 (function() {
 
-	//getLocationAndCallWeatherAPI();
+	getLocationAndCallWeatherAPI();
 	getNoticias();
 	getCapacitaciones();
 	getPlataformas();
 	getFaqs();
 	
+	$('#recipeCarousel').carousel({
+	  interval: 10000
+	});
+	
+	$('#recipeCarouselCapa').carousel({
+	  interval: 10000
+	});
+
+	
+	$('.carousel .carousel-item').each(function(){
+	    var minPerSlide = 4;
+	    var next = $(this).next();
+	    if (!next.length) {
+	    next = $(this).siblings(':first');
+	    }
+	    next.children(':first-child').clone().appendTo($(this));
+	    
+	    for (var i=0;i<minPerSlide;i++) {
+	        next=next.next();
+	        if (!next.length) {
+	        	next = $(this).siblings(':first');
+	      	}
+	        
+	        next.children(':first-child').clone().appendTo($(this));
+	      }
+	});
+
 	
 })();
 
@@ -90,6 +117,25 @@ function obtenerEntradasTemperaturasExtremasPorDia(data) {
     return entradasTemperaturasExtremasPorDia;
 }
 
+function traducir(clima) {
+    switch(clima) {
+        case 'Thunderstorm':
+            return 'Tormenta eléctrica';
+		case 'Llovizna':
+        	return '';
+        case 'Rain':
+            return 'Lluvia';
+        case 'Snow':
+            return 'Nieve';
+		case 'Clear':
+            return 'Despejado';
+		 case 'Clouds':
+            return 'Nublado';        
+        default:
+            return 'Clima desconocido';
+    }
+}
+
 
 function getLocationAndCallWeatherAPI() {
 
@@ -109,7 +155,6 @@ function showWeatherData(position) {
 	callWeatherAPI(latitude, longitude);
 }
 
-
 function callWeatherAPI(latitude, longitude){
 
 	 const apiKey = '';
@@ -128,11 +173,12 @@ function callWeatherAPI(latitude, longitude){
 
 
 function createCardWeather(diaSemana, diaCalendario, temMin, temMax, tipoDia, imagen, indice) {
+	let tipoDiaSemana = traducir(tipoDia);
 	var cardHtml = "";
 	if(indice > 1){
-		cardHtml += `<div class="card card-custom" style="margin-left: 25px;">`
+		cardHtml += `<div class="card card-custom card-clima-semana" style="margin-left: 25px;">`
 	}else{
-		cardHtml += `<div class="card card-custom">`
+		cardHtml += `<div class="card card-custom card-clima-semana">`
 	}
     cardHtml += `    	
 		  <div class="card-body">
@@ -140,24 +186,27 @@ function createCardWeather(diaSemana, diaCalendario, temMin, temMax, tipoDia, im
 		    <h5 class="card-title">${diaSemana}</h5>
 		    </div>
 		    <h6 class="card-subtitle mb-2 text-muted" style="font-size: 14px;">${diaCalendario}</h6>
-		   	<img src="../SiteAssets/img/${imagen}.png" class="card-img-top" alt="..." style="width: 48px;height: 48px;">
+		   	<img src="https://openweathermap.org/img/wn/${imagen}@2x.png" class="card-img-top" alt="..." style="width: 48px;height: 48px;">
 			<h5 class="">${temMax}°</h5>
-			<h6 class="mb-2 text-muted">${tipoDia}</h6>
+			<h6 class="mb-2 text-muted">${tipoDiaSemana}</h6>
 		    <p class="card-text tem-max-min">${temMin} - ${temMax}℃</p>
 		  </div>
 		</div>`;
     return cardHtml;
+    //<img src="../SiteAssets/img/${imagen}.png" class="card-img-top" alt="..." style="width: 48px;height: 48px;">
 }
 
 function createCardWeatherToday(diaSemana, ubicacion, temMin, temMax, tipoDia, imagen, temActual) {
+	let tipoDiaGet = traducir(tipoDia);
     var cardHtml = `
 		    <h5 class="">Mi ubicación</h5>
 		    <h6 class="card-subtitle mb-2 text-muted" style="font-size: 14px;">${ubicacion}</h6>
-		   	<img src="../SiteAssets/img/${imagen}.png" class="card-img-top" alt="..." style="width: 79px;height: 79px;">
+		   	<img src="https://openweathermap.org/img/wn/${imagen}@2x.png" class="card-img-top" alt="..." style="width: 79px;height: 79px;">
 			<h5 style="font-size: 60px;color: #25458A;">${temActual}°</h5>
-			<h6 class="mb-2 text-muted">${tipoDia}</h6>
+			<h6 class="mb-2 text-muted">${tipoDiaGet}</h6>
 		    <p class="card-text tem-max-min">Máxima : ${temMax}℃ - Mínima : ${temMin}℃ </p>`;
     return cardHtml;
+    //<img src="../SiteAssets/img/${imagen}.png" class="card-img-top" alt="..." style="width: 79px;height: 79px;">
 }
 
   
@@ -180,8 +229,8 @@ function mostrarTarjetas(data) {
         const temMinPrimerEntrada = Math.round(primerEntrada.temp_min_entrada.main.temp_min);
         const temActualPrimerEntrada = Math.round(data.list[0].main.temp);
         const temMaxPrimerEntrada = Math.round(primerEntrada.temp_max_entrada.main.temp_max);
-        const tipoDiaPrimerEntrada = primerEntrada.temp_max_entrada.weather[0].description; // Asumiendo que el tipo de día está en la primera entrada del día
-        const imagenPrimeraEntrada = primerEntrada.temp_max_entrada.weather[0].main;
+        const tipoDiaPrimerEntrada = primerEntrada.temp_max_entrada.weather[0].main; // Asumiendo que el tipo de día está en la primera entrada del día
+        const imagenPrimeraEntrada = primerEntrada.temp_max_entrada.weather[0].icon;
 	    const cardHtmlPrimerEntrada = createCardWeatherToday(diaSemanaPrimerEntrada, ubicacionPrimerEntrada, temMinPrimerEntrada, temMaxPrimerEntrada, tipoDiaPrimerEntrada,imagenPrimeraEntrada,temActualPrimerEntrada);
         dia.innerHTML += cardHtmlPrimerEntrada;
     }
@@ -195,8 +244,8 @@ function mostrarTarjetas(data) {
         const diaCalendario = fecha.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
         const temMin = Math.round(entrada.temp_min_entrada.main.temp_min);
         const temMax = Math.round(entrada.temp_max_entrada.main.temp_max);
-        const tipoDia = entrada.temp_max_entrada.weather[0].description; // Asumiendo que el tipo de día está en la primera entrada del día
-        const imagen = entrada.temp_max_entrada.weather[0].main;
+        const tipoDia = entrada.temp_max_entrada.weather[0].main; // Asumiendo que el tipo de día está en la primera entrada del día
+        const imagen = entrada.temp_max_entrada.weather[0].icon;
         const cardHtml = createCardWeather(diaSemana, diaCalendario, temMin, temMax, tipoDia, imagen, i);
         semana.innerHTML += cardHtml;
         
@@ -205,53 +254,56 @@ function mostrarTarjetas(data) {
 
 //************************ NOTICIAS *****************************//
 
-function createCardNoticias(urlImg, titulo, cuerpo, idNoticia, indice){
-	let cuerpoTxt = cuerpo.substring(0, 150);
-	var cardHtml = "";
-	if(indice > 0){
-		cardHtml += `<div class="" style="margin-left: 20px;width: 18rem;">`
-	}else{
-		cardHtml += `<div class="" style="width: 18rem;">`
-	}
+function createCardNoticias(urlImg, titulo, cuerpo, idNoticia, indice) {
+    let cuerpoTxt = cuerpo.substring(0, 150);
+    var cardHtml = "";
 
-	 cardHtml += `    	
-		  <div class="card">
-			  <img src="${urlImg}" class="card-img-top" alt="..." style="height: 150px;">
-			  <div class="card-body card-body-noticias">
-			    <h5 class="card-title titulo-card-noticias">${titulo}</h5>
-			    <p class="card-text">${cuerpoTxt}...</p>		   
-			  </div>
-			  <div class="" style="padding: 0.75rem 1.25rem">
-			    <a href="#" class="a-footer-noticias">Leer más</a>
-			  </div>
-			</div>`;
+    if (indice > 0) {
+        cardHtml += `<div class="carousel-item">`;
+    } else {
+        cardHtml += `<div class="carousel-item active">`;
+    }
+
+    cardHtml += `
+        <div class="col-md-3">    	
+            <div class="card">
+                <img src="${urlImg}" class="card-img-top" alt="..." style="height: 150px;">
+                <div class="card-body card-body-noticias">
+                    <h5 class="card-title titulo-card-noticias">${titulo}</h5>
+                    <p class="card-text">${cuerpoTxt}...</p>		   
+                </div>
+                <div class="" style="padding: 0.75rem 1.25rem">
+                    <a href="#" class="a-footer-noticias">Leer más</a>
+                </div>
+            </div>
+        </div>
+    </div>`;
+
     return cardHtml;
-
-
 }
 
 
-function getNoticias(){
-	
-	const divNoticias = document.getElementById('divNoticias');
-	var noticias = "?$filter=activo eq 1&$orderby=orden asc&$expand=AttachmentFiles&$top=4";
-	
-	getListItem("Noticias",noticias, function (data) {
-    	if(data.d.results.length > 0){
-    		console.log(data.d.results);
-    		var dataNoticia = data.d.results;
-    		
-    		dataNoticia.forEach(function(element, index) {
-			    const cardHtmlNoticia = createCardNoticias(element.AttachmentFiles.results[0].ServerRelativeUrl, element.Title, element.texto, element.ID, index);
-			    divNoticias.innerHTML += cardHtmlNoticia;
-			});    		
-		}
+function getNoticias() {
+    const divNoticias = document.getElementById('divNoticias');
+    divNoticias.innerHTML = ""; // Limpiar el contenido antes de agregar nuevas tarjetas
 
-	}, function (d) {
+    var noticias = "?$filter=activo eq 1&$orderby=orden asc&$expand=AttachmentFiles&$top=10";
+
+    getListItem("Noticias", noticias, function(data) {
+        if (data.d.results.length > 0) {
+            console.log(data.d.results);
+            var dataNoticia = data.d.results;
+
+            dataNoticia.forEach(function(element, index) {
+                const cardHtmlNoticia = createCardNoticias(element.AttachmentFiles.results[0].ServerRelativeUrl, element.Title, element.texto, element.ID, index);
+                divNoticias.innerHTML += cardHtmlNoticia;
+            });
+        }
+
+    }, function(d) {
         console.log(d);
-       
-    });
 
+    });
 }
 
 
@@ -260,23 +312,27 @@ function getNoticias(){
 function createCardCapacitaciones(urlImg, titulo, cuerpo, idNoticia, indice){
 	let cuerpoTxtCp = cuerpo.substring(0, 150);
 	var cardHtml = "";
-	if(indice > 0){
-		cardHtml += `<div class="" style="margin-left: 20px;width: 18rem;">`
-	}else{
-		cardHtml += `<div class="" style="width: 18rem;">`
-	}
+ if (indice > 0) {
+        cardHtml += `<div class="carousel-item">`;
+    } else {
+        cardHtml += `<div class="carousel-item active">`;
+    }
+    
+    cardHtml += `
+        <div class="col-md-3">    	
+            <div class="card">
+                <img src="${urlImg}" class="card-img-top" alt="..." style="height: 150px;">
+                <div class="card-body card-body-noticias">
+                    <h5 class="card-title titulo-card-noticias">${titulo}</h5>
+                    <p class="card-text">${cuerpoTxtCp}...</p>		   
+                </div>
+                <div class="" style="padding: 0.75rem 1.25rem">
+                    <a href="#" class="a-footer-noticias">Leer más</a>
+                </div>
+            </div>
+        </div>
+    </div>`;
 
-	 cardHtml += `    	
-		  <div class="card">
-			  <img src="${urlImg}" class="card-img-top" alt="..." style="height: 150px;">
-			  <div class="card-body card-body-noticias">
-			    <h5 class="card-title titulo-card-noticias">${titulo}</h5>
-			    <p class="card-text">${cuerpoTxtCp}...</p>		   
-			  </div>
-			  <div class="" style="padding: 0.75rem 1.25rem">
-			    <a href="#" class="a-footer-noticias">Leer más</a>
-			  </div>
-			</div>`;
     return cardHtml;
 
 
@@ -284,55 +340,54 @@ function createCardCapacitaciones(urlImg, titulo, cuerpo, idNoticia, indice){
 
 
 function getCapacitaciones(){
-	
-	const divCapacitaciones = document.getElementById('divCapacitaciones');
-	var noticias = "?$filter=activo eq 1&$orderby=orden asc&$expand=AttachmentFiles&$top=4";
-	
-	getListItem("Capacitaciones",noticias, function (data) {
-    	if(data.d.results.length > 0){
-    		console.log(data.d.results);
-    		var dataCapacitaciones = data.d.results;
-    		
-    		dataCapacitaciones.forEach(function(element, index) {
-			    const cardHtmlNoticia = createCardCapacitaciones(element.AttachmentFiles.results[0].ServerRelativeUrl, element.Title, element.texto, element.ID, index);
-			    divCapacitaciones.innerHTML += cardHtmlNoticia;
-			});    		
-		}
+    const divCapacitaciones = document.getElementById('divCapacitaciones');
+    divCapacitaciones.innerHTML = ""; // Limpiar el contenido antes de agregar nuevas tarjetas
 
-	}, function (d) {
+    var noticias = "?$filter=activo eq 1&$orderby=orden asc&$expand=AttachmentFiles&$top=4";
+
+    getListItem("Capacitaciones", noticias, function (data) {
+        if (data.d.results.length > 0) {
+            console.log(data.d.results);
+            var dataCapacitaciones = data.d.results;
+
+            dataCapacitaciones.forEach(function (element, index) {
+                const cardHtmlCapacitacion = createCardCapacitaciones(element.AttachmentFiles.results[0].ServerRelativeUrl, element.Title, element.texto, element.ID, index);
+                divCapacitaciones.innerHTML += cardHtmlCapacitacion;
+            });
+        }
+
+    }, function (d) {
         console.log(d);
-       
-    });
 
+    });
 }
 
 //************************ FAQS *****************************//
 
 function createCardFaqs(titulo, respuestaList, idPlataforma, indice){
 	let tituloTxtFaqs = titulo.substring(0, 150);
-	let respuesta = respuestaList.substring(0, 150);
+	let respuesta = respuestaList.substring(0, 150) +" ...";
 	var cardHtml = "";
 
-	 cardHtml += `    	
+	 cardHtml += ` 		    
 		  <div class="accordion" id="accordionExample${indice}" style="margin-top:26px;">
-			<div class="card card-faqs">
-			  <div class="card-header" id="headingOne${indice}">
-				<h2 class="mb-0">
-				  <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne${indice}" aria-expanded="true" aria-controls="collapseOne">
-					${tituloTxtFaqs}
-				  </button>
-				</h2>
+			  <div class="card" style="">
+			    <div class="card-header" id="headingOne${indice}">
+			      <h2 class="mb-0">
+			        <button id="btnCollapse${indice}" class="btn btn-link btn-block text-left d-flex" type="button" data-toggle="collapse" data-target="#collapseOne${indice}" aria-expanded="true" aria-controls="collapseOne${indice}">
+			          <span>${tituloTxtFaqs}</span><img id="imgCollapse${indice}" class="ml-auto" src="../SiteAssets/img/arrowD.png" alt="Card image cap" style="width: 24px;padding-top: 4px;">
+			        </button>
+			      </h2>
+			    </div>
+			
+			    <div id="collapseOne${indice}" class="collapse" aria-labelledby="headingOne${indice}" data-parent="#accordionExample${indice}">
+			      <div class="card-body text-left">
+ 						${respuesta }
+ 			      </div>
+			    </div>
 			  </div>
-		  
-			  <div id="collapseOne${indice}" class="collapse" aria-labelledby="headingOne${indice}" data-parent="#accordionExample${indice}">
-				<div class="card-body card-body-faqs">
-				  ${respuesta }
-				  </div>
-			  </div>
-			</div>
-		  </div>`;
+			</div>`;
     return cardHtml;
-
 
 }
 
@@ -361,9 +416,26 @@ function getFaqs(){
 }
 
 
+function cambiaIcon(indice){
+
+	let elemento = document.getElementById("btnCollapse"+indice);
+	let imagen = document.getElementById("imgCollapse"+indice);
+	    imagen.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
+       	if (elemento.classList.contains("collapsed")) {
+			imagen.src = "../SiteAssets/img/arrowUp.png";
+		   // alert("El elemento tiene la clase 'collapsed'"); // flecha arriba
+		} else {
+			imagen.src = "../SiteAssets/img/arrowD.png";
+		   // alert("El elemento no tiene la clase 'collapsed'"); // flecha abajo
+		}
+
+}
+
+
 //************************ PLATAFORMAS *****************************//
 
-function createCardPlataformas(titulo, idPlataforma, indice){
+function createCardPlataformas(titulo, idPlataforma, indice, url){
 	let cuerpoTxtPl = titulo.substring(0, 150);
 	var cardHtml = "";
 	if(indice > 0){
@@ -372,15 +444,17 @@ function createCardPlataformas(titulo, idPlataforma, indice){
 		cardHtml += `<div class="card" style="">`
 	}
 
-	 cardHtml += `    	
-		  <div class="card-horizontal">
+	cardHtml += `
+	    <a href="${url}" class="enlace-card" target="_blank">
+	        <div class="card-horizontal">
 	            <div class="img-square-wrapper d-flex justify-content-center">
 	                <img class="img-plataformas" src="../SiteAssets/img/IconPlataformas.png" alt="Card image cap">
 	            </div>
 	            <div class="card-body">
-	                <p class="card-text"> ${cuerpoTxtPl}</p>
+	                <p class="card-text">${cuerpoTxtPl}</p>
 	            </div>
-	        </div>`;
+	        </div>
+	    </a>`;
     return cardHtml;
 
 
@@ -390,7 +464,7 @@ function createCardPlataformas(titulo, idPlataforma, indice){
 function getPlataformas(){
 	
 	const divPlataformas = document.getElementById('divPlataformas');
-	var noticias = "?$filter=activo eq 1&$orderby=orden asc&$expand=AttachmentFiles&$top=4";
+	var noticias = "?$filter=activo eq 1&$orderby=orden asc&$expand=AttachmentFiles&$top=10";
 	
 	getListItem("Plataformas",noticias, function (data) {
     	if(data.d.results.length > 0){
@@ -398,7 +472,7 @@ function getPlataformas(){
     		var dataPlataformas = data.d.results;
     		
     		dataPlataformas.forEach(function(element, index) {
-			    const cardHtmlPlataformas = createCardPlataformas(element.Title, element.ID, index);
+			    const cardHtmlPlataformas = createCardPlataformas(element.Title, element.ID, index, element.url.Url);
 			    divPlataformas.innerHTML += cardHtmlPlataformas;
 			});    		
 		}

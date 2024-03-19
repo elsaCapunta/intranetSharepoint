@@ -10,10 +10,10 @@
 	<meta name="ProgId" content="SharePoint.WebPartPage.Document" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="CollaborationServer" content="SharePoint Team Web Site" />
-	<SharePoint:ScriptBlock runat="server">var navBarHelpOverrideKey = 
-	&quot;WSSEndUser&quot;; </SharePoint:ScriptBlock>
+	<SharePoint:ScriptBlock runat="server">
+	var navBarHelpOverrideKey = &quot;WSSEndUser&quot;;
+	</SharePoint:ScriptBlock>
 <SharePoint:StyleBlock runat="server">
-
 #s4-ribbonrow{
 	display:none !important;
 }
@@ -23,6 +23,7 @@
 }
 
 #s4-titlerow, #sideNavBox, 
+
 #s4-ribbonrow
 {
 	display:none!important;
@@ -32,6 +33,7 @@
 {
 	margin-left:0px;
 	margin-right: 0px;
+	min-width: 0px !important;
 	
 }
 body #s4-leftpanel {
@@ -43,35 +45,33 @@ body #s4-leftpanel {
 
 .nav-link{
 	padding-right: 1rem !important;
-&nbsp;&nbsp;&nbsp; padding-left: 1rem!important; 
+	padding-left: 1rem!important; 
 }
-
-
-
-
 </SharePoint:StyleBlock>
 </asp:Content>
 <asp:Content ContentPlaceHolderId="PlaceHolderSearchArea" runat="server">
-<SharePoint:FlightedContent runat="server" ExpFeature="Reserved_Server_ExpFeature30731" RenderIfInFlight="true"><SharePoint:SearchInNavBarEnabledContent runat="server" RenderIfEnabled="false">
-
+<SharePoint:FlightedContent runat="server" ExpFeature="Reserved_Server_ExpFeature30731" RenderIfInFlight="true">
+	<SharePoint:SearchInNavBarEnabledContent runat="server" RenderIfEnabled="false">
 		<SharePoint:DelegateControl runat="server" ControlId="SmallSearchInputBox" />
-	</Sharepoint:SearchInNavBarEnabledContent><SharePoint:SearchInNavBarEnabledContent runat="server" RenderIfEnabled="true">
-
+	</Sharepoint:SearchInNavBarEnabledContent>
+	<SharePoint:SearchInNavBarEnabledContent runat="server" RenderIfEnabled="true">
 		<SharePoint:WebTemplateBasedContent runat="server" WebTemplates="STS|BLANKINTERNET|CMSPUBLISHING|GROUP" RenderIfInWebTemplates="false">
 			<SharePoint:DelegateControl runat="server" ControlId="SmallSearchInputBox" />
 		</SharePoint:WebTemplateBasedContent>
-	</Sharepoint:SearchInNavBarEnabledContent></SharePoint:FlightedContent>
-<SharePoint:FlightedContent runat="server" ExpFeature="Reserved_Server_ExpFeature30731" RenderIfInFlight="false"><SharePoint:DelegateControl runat="server" ControlId="SmallSearchInputBox" /></SharePoint:FlightedContent>
+	</Sharepoint:SearchInNavBarEnabledContent>
+</SharePoint:FlightedContent>
+<SharePoint:FlightedContent runat="server" ExpFeature="Reserved_Server_ExpFeature30731" RenderIfInFlight="false">
+	<SharePoint:DelegateControl runat="server" ControlId="SmallSearchInputBox" />
+</SharePoint:FlightedContent>
 </asp:Content>
 <asp:Content ContentPlaceHolderId="PlaceHolderPageDescription" runat="server">
 	<SharePoint:ProjectProperty Property="Description" runat="server"/>
 </asp:Content>
-
 <asp:Content ContentPlaceHolderId="PlaceHolderMain" runat="server">
 <!-- DESARROLLO -->
 
 	<meta charset="utf-8" />
-	<title>Sistema para el seguimiento de las APIS y AGDs</title>
+	<title>Intranet - Home</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="keywords" />
 	<meta content="" name="description" />
@@ -87,7 +87,7 @@ body #s4-leftpanel {
 	<div class="container">
 
 <nav class="navbar navbar-expand-lg navbar-light" style="padding-left:0px !important;">
-    <div class="container" style="padding-left:0px !important;">
+    <div class="container justify-content-sm-center" style="padding-left:0px !important;">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">
                 <img src="../SiteAssets/img/logo.png" class="d-inline-block align-top" alt=""/>
@@ -103,7 +103,7 @@ body #s4-leftpanel {
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item text-menu active active-line"><a class="nav-link" href="#">
 				Inicio</a></li>
-                <li class="nav-item text-menu"><a class="nav-link" href="#">
+                <li class="nav-item text-menu"><a class="nav-link" href="Nosotros.aspx">
 				Nosotros</a></li>
                 <li class="nav-item text-menu"><a class="nav-link" href="#">
 				Organización Interna</a></li>
@@ -122,19 +122,24 @@ body #s4-leftpanel {
     </div>
 </nav>
 		
-		<div class="jumbotron jumbotron-fluid" style="background-image: url('../SiteAssets/img/Hero.png'); background-size: cover; background-repeat: no-repeat; height: 400px; position: relative;">
-		  <div class="container">
-		    <div class="jumbotron-content text-left">
-		      <h1 class="display-6 titulo-jumbotron">Compañía General De 
-				Construcciones</h1>
-		      <p class="lead subtitulo-jumbotron">Somos una constructora 
-				comprometida con la creación de espacios acogedores e 
-				funcionales. Con una amplia experiencia en el sector, ofrecemos 
-				soluciones técnicas innovales y personalizadas para proyectos de 
-				construcción en diversas áreas.</p>
-		    </div>
-		  </div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="jumbotron jumbotron-fluid" style="background-image: url('../SiteAssets/img/Hero.png'); background-size: cover; background-repeat: no-repeat; height: 400px; position: relative;">
+				  <div class="container">
+				    <div class="jumbotron-content text-left">
+				      <h1 class="display-6 titulo-jumbotron">Compañía General De 
+						Construcciones</h1>
+				      <p class="lead subtitulo-jumbotron">Somos una constructora 
+						comprometida con la creación de espacios acogedores e 
+						funcionales. Con una amplia experiencia en el sector, ofrecemos 
+						soluciones técnicas innovales y personalizadas para proyectos de 
+						construcción en diversas áreas.</p>
+				    </div>
+				  </div>
+				</div>
+			</div>	
 		</div>
+		
 		
 		
 		<!-- CLIMA -->
@@ -152,11 +157,12 @@ body #s4-leftpanel {
 				</div>
 			</div>
 					
-			<div class="col-lg-8">
+			<div class="col-lg-8 clima-semana-mobile">
 				<div class="card w-100">
 				  <div class="card-body">
 				  <div class="div-header-tiempo">
-				  	<span class="card-title header-text">Pronóstico  para los siguientes días</span>
+				  	<span class="card-title header-text">Pronóstico para los 
+					siguientes días</span>
 				  </div>
 				  	
 			   		<div class="d-flex justify-content-center" id="climaSemana" style="margin-top:26px;">
@@ -167,7 +173,7 @@ body #s4-leftpanel {
 		</div>
 		
 		
-		<!-- ATAJOS Y NOTICIAS -->
+		<!-- NOTICIAS -->
 		<div class="row mt-3">
 			<div class="col-lg-12">
 				<div class="card card-today w-100">
@@ -175,12 +181,24 @@ body #s4-leftpanel {
 					   <div class="div-header-noticias">
 						  	<span class="card-title header-text">Noticias</span>
 					  </div>
-					  <div class="d-flex justify-content-center" id="divNoticias" style="margin-bottom: 7px;">					  
+					  <div class="" style="margin-bottom: 7px;">					  
+						<div class="row mx-auto my-auto">
+							<div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+								<div class="carousel-inner w-100" role="listbox" id="divNoticias">
+
+					  			</div>
+					  			<a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
+					                <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+					                <span class="sr-only">Previous</span>
+					            </a>
+					            <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
+					                <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+					                <span class="sr-only">Next</span>
+					            </a>
+							</div>
+						</div>
 					  </div>
-					  <div class="botton-noticias">
-					  	 <button class="btn btn-primary btn-noticias">Ver más</button>
-					  </div>
-				  </div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -192,14 +210,27 @@ body #s4-leftpanel {
 				<div class="card card-today w-100">
 				  <div class="card-body">
 					   <div class="div-header-noticias">
-						  	<span class="card-title header-text">Noticias</span>
+						  	<span class="card-title header-text">Capacitaciones</span>
 					  </div>
-					  <div class="d-flex justify-content-center" id="divCapacitaciones" style="margin-bottom: 7px;">					  
-					  </div>
-					  <div class="botton-noticias">
-					  	 <button class="btn btn-primary btn-noticias">Ver más</button>
-					  </div>
+					  <div class=""  style="margin-bottom: 7px;">	
+					  	<div class="row mx-auto my-auto">
+							<div id="recipeCarouselCapa" class="carousel slide w-100" data-ride="carousel">
+								<div class="carousel-inner w-100" role="listbox" id="divCapacitaciones">
 
+					  			</div>
+					  			<a class="carousel-control-prev w-auto" href="#recipeCarouselCapa" role="button" data-slide="prev">
+					                <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+					                <span class="sr-only">Previous</span>
+					            </a>
+					            <a class="carousel-control-next w-auto" href="#recipeCarouselCapa" role="button" data-slide="next">
+					                <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+					                <span class="sr-only">Next</span>
+					            </a>
+							</div>
+						</div>
+				  
+					  </div>
+					  
 				  </div>
 				</div>
 			</div>
@@ -215,7 +246,10 @@ body #s4-leftpanel {
 					   <div class="div-header-tiempo">
 						  	<span class="card-title header-text">FAQ’s</span>
 					  </div>
-					  <div class="text-center" id="divFaqs" style="margin-bottom: 7px;">	
+					  <div class="text-center" id="divFaqs" style="margin-bottom: 7px;">
+					  
+						
+	
 					  </div>
 					  <div class="botton-noticias">
 					  	 <button class="btn btn-primary btn-noticias">Ver más</button>
@@ -227,26 +261,26 @@ body #s4-leftpanel {
 			
 					
 			<div class="col-lg-4">
-				<div class="card w-100">
-				  <div class="card-body">
-				  <div class="div-header-tiempo">
-				  	<span class="card-title header-text">Plataformas</span>
-				  </div>
-				  	
-			   		<div class="d-flex flex-column" id="divPlataformas" style="margin-top:26px;">
-			   		</div>
-				  </div>
-				</div>
+			    <div class="card w-100">
+			        <div class="card-body">
+			            <div class="div-header-tiempo">
+			                <span class="card-title header-text">Plataformas</span>
+			            </div>
+			
+			            <div class="d-flex flex-column" id="divPlataformas" style="margin-top:26px; max-height: 300px; overflow-y: auto;">
+			                <!-- Contenido dinámico se agregará aquí -->
+			            </div>
+			        </div>
+			    </div>
 			</div>
 		</div>
 		
-		<footer class="py-4 mt-5" style="background-color: #25458a;">
+		<footer class="py-3 mt-5 foter-custom">
 		    <div class="">
-		      <div class="footer-icons">
-		        <a href="#"><i class="fab fa-facebook"></i></a>
-		        <a href="#"><i class="fab fa-twitter"></i></a>
-		        <a href="#"><i class="fab fa-instagram"></i></a>
-		        <a href="#"><i class="fab fa-linkedin"></i></a>
+		      <div class="d-flex justify-content-center">
+		        <a href="#"><i class="fa fa-facebook-square" aria-hidden="true" style="color:white;padding-right: 12px;"></i></a>
+		        <a href="#"><i class="fa fa-instagram" aria-hidden="true" style="color:white;padding-right: 12px;"></i></a>
+		        <a href="#"><i class="fa fa-linkedin-square" aria-hidden="true" style="color:white;"></i></a>
 		      </div>
 		    </div>
 		  </footer>	
@@ -254,22 +288,10 @@ body #s4-leftpanel {
 	</div>
 	
 	
-	
-	
-	
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@microsoft/microsoft-graph-client/lib/graph-js-sdk.js"></script>
 	<script type="text/javascript" src="../SiteAssets/lib/jquery/jquery-3.5.1.js"></script>
 	<script type="text/javascript" src="../SiteAssets/lib/bootstrap-4.6.2/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../SiteAssets/js/rest_.js"></script>
 	<script type="text/javascript" src="../SiteAssets/js/inicio.js"></script>
 
-</asp:Content>
-<asp:Content id="Content1" runat="server" contentplaceholderid="PlaceHolderBodyAreaClass">
 
-	<style type="text/css">
-.style1 {
-	text-decoration: underline;
-}
-</style>
 </asp:Content>
-
