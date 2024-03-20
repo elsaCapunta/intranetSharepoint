@@ -1,0 +1,268 @@
+body{
+	
+	
+}
+
+.container{
+	max-width: 1160px !important;
+	background-color:#F8F8F9;
+
+}
+
+.titulos{
+	font-size: 36px;
+    font-weight: bold;
+}
+
+.navbar-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.navbar-brand-name {
+    margin-top: 10px;
+}
+
+.active-line{
+	border-bottom: solid 3px;
+    border-bottom-color: #F5BF00;
+}
+
+.text-empresa{
+	
+	color:#000000 !important;
+	font-size:24px !important;
+}
+
+.text-menu{
+	color:#000000 !important;
+	font-size:14px !important;
+}
+
+.jumbotron-content {
+  background-color: rgba(52, 52, 52 , 0.69); /* Negro con transparencia */
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 2%; /* Ajusta este valor para mover el cuadro hacia la izquierda */
+  transform: translateY(-50%);
+  max-width: 64%;
+  text-align: center;
+  border-radius: 10px
+}
+
+.jumbotron-content-nuestro-compromiso {
+    background-color: transparent;
+    top: 83%;
+    left: 6%;
+    max-width: 100%;
+}
+
+.titulo-jumbotron{
+	font-size:22px;
+	color:#FFFFFF;
+}
+
+.subtitulo-jumbotron{
+	font-size:14px;
+	color:#F3F2F1;
+}
+
+.titulo-nuestro-compromiso{
+	font-size:20px;
+	font-weight:bold;
+}
+
+.subtitulo-nuestro-compromiso{
+	font-size:36px;
+	font-weight:bold;
+}
+
+.texto-nuestro-compromiso{
+	font-size:18px;
+	font-weight:400;
+}
+
+
+
+.header-text {
+    background-color: #25458A;
+    color: #FFFFFF;
+    font-size: 16px;
+    padding: 5px 10px 4px 10px; 
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.div-header-tiempo{
+	border-bottom: solid 3px;
+    border-color: #25458A;
+    margin-top: 10px;
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Definición de la sombra */
+  border-radius: 8px; /* Redondeo de las esquinas de la tarjeta */
+  transition: box-shadow 0.3s ease; /* Transición suave de la sombra */
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Cambiar la sombra al pasar el ratón */
+}
+
+.card-body {
+	padding: 1rem !important;
+}
+
+.card-custom{
+	width: 18rem;
+    text-align: center;
+    background-color: #D9E1F1;
+    /**margin-left: 20px;**/
+}
+
+.card-today{
+	width: 18rem;
+    text-align: left;
+     /**margin-left: 20px;**/
+}
+
+.text-p-nosotros{
+	color:#717171;
+	font-size:20px;
+	font-weight:400;
+}
+
+.card-text-confia{
+	font-size:16px;
+	color:#505050;
+	font-weight:400;
+}
+
+.card-confia{
+	height: 16rem;
+}
+
+.card-title-nosotros{
+	margin-bottom:0px !important;
+}
+
+.card-nosotros{
+	height: 17rem;
+}
+
+.card-text-principios{
+	    font-size: 16px;
+    color: #505050;
+    font-weight: 400;
+    text-align:center;
+}
+
+.card-titulo-principios{
+	font-size: 23px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+
+.footer-icons {
+  text-align: center; /* Alinear al centro */
+}
+
+.footer-icons a {
+  color: #333; /* Color de los iconos */
+  margin: 0 10px; /* Margen entre los iconos */
+}
+
+.foter-custom{
+	background-color: #25458a;
+    height: 50px;
+}
+
+
+/********* noticias detalle *************/
+
+.jumbotron-detalle-noticias {
+	margin-bottom:0px !important;
+}
+
+.div-header-noticias{
+	border-bottom: solid 3px;
+    border-color: #25458A;
+    margin-top: 10px;
+    margin-bottom: 13px;
+}
+
+.card-body-noticias{
+	font-size: 13px;
+	height: 170px !important;
+}
+
+
+.footer-card-noticias{
+	padding: 0.75rem 1.25rem;	
+}
+
+.titulo-card-noticias{
+	font-size:16px;
+}
+
+.a-footer-noticias{
+	color: #25458A !important;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+.botton-noticias{
+	margin-bottom: 4px;
+    text-align: center;
+    margin-top: 24px;
+}
+
+.btn-noticias{
+	width: 216px;
+    background-color: #25458A !important;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+
+@media (max-width: 768px) {
+    .carousel-inner .carousel-item > div {
+        display: none;
+    }
+    .carousel-inner .carousel-item > div:first-child {
+        display: block;
+    }
+}
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+/* display 3 */
+@media (min-width: 768px) {
+    
+    .carousel-inner .carousel-item-right.active,
+    .carousel-inner .carousel-item-next {
+      transform: translateX(25%);
+    }
+    
+    .carousel-inner .carousel-item-left.active, 
+    .carousel-inner .carousel-item-prev {
+      transform: translateX(-25%);
+    }
+}
+
+.carousel-inner .carousel-item-right,
+.carousel-inner .carousel-item-left{ 
+  transform: translateX(0);
+}
+
+
